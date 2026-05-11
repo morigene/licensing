@@ -43,8 +43,8 @@ The Bank Licensing Portal API is developed using the following technologies and 
 ### Core Technologies
 
 - **Java 17**
-- **Spring Boot 4.0.6**
-- **Apache Maven**
+- **Spring Boot 3.5.6**
+- **Apache Maven 3.9.15**
 - **Embedded Apache Tomcat**
 
 ### Spring Boot Starters
@@ -414,6 +414,3 @@ The API can be started using a single command and tested immediately using Postm
 This document includes sample request payloads, sample responses, HTTP status codes, and deployment instructions to support development, testing, and integration.
 
 #### N.B: Attached SRS document for this app and I focused on that rather actual finished built code. It's inside this repository
-
-#   l i c e n s i n g  
- 

@@ -10,10 +10,7 @@ import lombok.NoArgsConstructor;
 import rw.nbr.licensing.user.entity.InstitutionAccessAccount;
 
 
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+
 @Entity
 @Table(name = "EL_TOKEN")
 public class Token {
