@@ -1,0 +1,101 @@
+# SERVER CONFIGURATION (Tomcat port)
+server:
+  port: 3000  # Change this port to your desired value
+
+# APPLICATION CONFIGURATION DURING STARTUP
+spring:
+  application:
+    name: licensing
+    super-admin:
+      institution_Abbr: NBR
+      institution_name: "National Bank of Rwanda"
+      TIN: "111111111"
+      ID: "XXXXXXXXXXXXXXX"
+      full_name: "XXXX YYYY"
+      phone: 078123654
+      email: x@gmaill.com
+      password: 123
+      init: true
+
+# AUTHENTICATION PARAMETERS.
+  security:
+    jwt:
+      secret-key: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+      expiration: 86400000 # a day
+      refresh-token:
+        expiration: 604800000 # 7 days
+    cors:
+      allowed-origins:
+       - "http://127.0.0.1:63405"
+       - "http://localhost:3000"
+      allowed-methods:
+        - "GET"
+        - "POST"
+        - "PUT"
+        - "DELETE"
+        - "OPTIONS"
+      allowed-headers:
+        - "Authorization"
+        - "Content-Type"
+
+ # DATABASE JPA AND HIBERNATE CONFIGURATION
+  datasource:
+    url: jdbc:oracle:thin:@127.0.0.1:1521:XE
+    username: nbr_test
+    password: 123
+    driver-class-name: oracle.jdbc.OracleDriver
+  flyway:
+    enable: false
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database: oracle
+    database-platform: org.hibernate.dialect.OracleDialect
+
+---
+
+# LOGGING THE CODE CONFIGURATIONS
+# Default (development) configuration
+spring:
+  config:
+    activate:
+      on-profile: default
+logging:
+  file:
+    name: logs/sharedcontracthub.log
+  level:
+    root: INFO
+    org.springframework: DEBUG
+    rw.gov.umucyo.sharedcontracthub: TRACE
+
+# Production-specific configuration
+---
+spring:
+  config:
+    activate:
+      on-profile: production
+logging:
+  file:
+    name: logs/sharedcontracthub.log
+  level:
+    root: INFO
+    org.springframework: INFO
+    rw.gov.umucyo.sharedcontracthub: INFO
+
+---
+spring:
+  web:
+    resources:
+      static-locations: classpath:/static/
+
+##     RUN SPRING
+# export SPRING_PROFILES_ACTIVE=production
+# java -jar sharedcontracthub.jar -spring.profile.active=production
+#OR
+#java -jar sharedcontracthub.jar --logging.level.org.springframework=INFO --logging.level.rw.gov.umucyo.sharedcontracthub=INFO
+# export SPRING_LOGGING_LEVEL_ORG_SPRINGFRAMEWORK=INFO
+# export SPRING_LOGGING_LEVEL_RW_GOV_UMUCYO_SHAREDCONTRACTHUB=INFO
